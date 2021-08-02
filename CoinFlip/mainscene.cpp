@@ -3,6 +3,9 @@
 #include <QAction>
 #include <QPainter>
 #include <QPixmap>
+#include <mypushbutton.h>
+#include <QDebug>
+
 MainScene::MainScene(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainScene)
@@ -15,6 +18,17 @@ MainScene::MainScene(QWidget *parent)
     //退出按钮实现
     connect(ui->actionquit,&QAction::triggered,[=](){
         this->close();
+    });
+
+    //开始按钮
+    MyPushButton * startBtn = new MyPushButton(":/res/MenuSceneStartButton.png");
+    startBtn->setParent(this);
+    //设置位置
+    startBtn->move(this->width() * 0.5 - startBtn->width() * 0.5 , this->height() * 0.7);
+    //开始按钮信号
+    connect(startBtn,&MyPushButton::clicked,[=](){
+        startBtn->zoom(0);
+        startBtn->zoom(1);
     });
 }
 void MainScene::paintEvent(QPaintEvent *)
@@ -31,6 +45,7 @@ void MainScene::paintEvent(QPaintEvent *)
     pix = pix.scaled(pix.width()*0.5,pix.height()*0.5);
     //画图标
     painter.drawPixmap(10,30,pix);
+
 }
 MainScene::~MainScene()
 {
