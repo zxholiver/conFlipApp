@@ -16,15 +16,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    login.cpp \
     main.cpp \
     mainscene.cpp \
-    mypushbutton.cpp
+    mypushbutton.cpp \
+    wsprocess.cpp
 
 HEADERS += \
+    login.h \
     mainscene.h \
-    mypushbutton.h
+    mypushbutton.h \
+    wsprocess.h
 
 FORMS += \
+    login.ui \
     mainscene.ui
 
 # Default rules for deployment.
@@ -35,3 +40,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     res.qrc
 CONFIG += resources_big
+QT += websockets

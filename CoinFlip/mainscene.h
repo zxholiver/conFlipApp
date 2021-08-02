@@ -16,6 +16,7 @@ public:
     ~MainScene();
     //重写paintEvent事件
     void paintEvent(QPaintEvent *);
+    void receiveLogin();
 
 private:
     Ui::MainScene *ui;

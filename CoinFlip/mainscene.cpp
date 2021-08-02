@@ -51,4 +51,8 @@ MainScene::~MainScene()
 {
     delete ui;
 }
+void MainScene::receiveLogin()
+{
+  this->show();
+}
 

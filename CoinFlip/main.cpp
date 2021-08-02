@@ -1,11 +1,16 @@
 #include "mainscene.h"
-
+#include "login.h"
 #include <QApplication>
+#include <QtWebSockets>
+#include <QDebug>
+#include "wsprocess.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainScene w;
-    w.show();
+    login login;
+    login.show();
+    QObject::connect(&login,&login::showMain, &w, &MainScene::receiveLogin);
     return a.exec();
 }
