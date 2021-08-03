@@ -17,15 +17,17 @@ public slots:
     void processMessage(const QString &message);//处理消息
     void socketDisconnected();//未连接
     void sendText();//发送文本消息
-    //登录槽函数
+    //登录槽函数,参数：账号，密码，
     void login(QString,QString);
     //注册槽函数
     void regist(QString,QString);
 signals:
+    void logined();
 private:
     //连接对象
     QWebSocket * ws = new QWebSocket();
     QString url;
+    bool islogin;
 
 };
 

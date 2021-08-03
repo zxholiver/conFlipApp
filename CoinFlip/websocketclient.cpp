@@ -23,7 +23,12 @@ void websocketClient::onNewConnection(){
 }
 //接收消息处理
 void websocketClient::processMessage(const QString &message){
+    islogin = false;
     qDebug()<<"收到信息"<<message;
+    //收到消息后根据消息采取跳转
+    if(message == "登录成功！"){
+        islogin = true;
+    }
 }
 //断开连接
 void websocketClient::socketDisconnected(){
@@ -38,6 +43,10 @@ void websocketClient::login(QString name,QString pwd){
     QString str = "{\"name\":\""+name+"\",\"pwd\":\""+pwd+"\",\"type\":\"login\"}";
     qDebug()<<str;
     ws->sendTextMessage(str);
+    if(islogin){
+        emit logined();
+        islogin = false;
+    }
 }
 //注册槽函数
 void websocketClient::regist(QString name,QString pwd){

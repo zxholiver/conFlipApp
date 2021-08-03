@@ -12,15 +12,16 @@ class login : public QWidget
 {
     Q_OBJECT
 signals:
-    void showMain();
+    void showMain();//显示主界面信号
 public:
     explicit login(QWidget *parent = nullptr);
+    ~login();
+public slots:
     //登录处理槽函数
     void loginProcess();
-    ~login();
-    websocketClient * ws = new websocketClient();
 private:
     Ui::login *ui;
+    websocketClient * ws = new websocketClient();
 };
 
 #endif // LOGIN_H
