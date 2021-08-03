@@ -4,6 +4,8 @@
 #include <QDebug>
 #include <QApplication>
 #include "websocketclient.h"
+#include <QErrorMessage>
+
 
 login::login(QWidget *parent) :
     QWidget(parent),
@@ -29,6 +31,16 @@ login::login(QWidget *parent) :
         emit showMain();
     });
     //----------------------------------------------
+    //账号或密码错误--------------
+    connect(ws,&websocketClient::err_name_pwd,[=](){
+        ui->getName->clear();
+        ui->getPwd->clear();
+        QErrorMessage err_wa(this);
+        err_wa.setWindowTitle("错误警告");
+        err_wa.showMessage("账号或密码错误！");
+        err_wa.exec();
+    });
+    //--------------------------
 }
 
 login::~login()

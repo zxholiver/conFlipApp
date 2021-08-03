@@ -26,14 +26,13 @@ signals:
     void logined();
     //已注册信号
     void registered();
+    //账号或密码错误信号
+    void err_name_pwd();
 private:
     //连接对象
     QWebSocket * ws = new QWebSocket();
+    //链接
     QString url;
-    //是否登录成功
-    bool islogin;
-    //是否注册成功
-    bool isregister;
 };
 
 #endif // WEBSOCKETCLIENT_H

@@ -2,6 +2,8 @@
 #define MYPUSHBUTTON_H
 
 #include <QPushButton>
+#include <QMouseEvent>
+
 class MyPushButton : public QPushButton
 {
     Q_OBJECT
@@ -12,6 +14,9 @@ public:
     QString normalImgPath;
     QString pressImgPath;
     void zoom(int);//弹跳判断
+    //重写按下、释放事件
+    void mousePressEvent(QMouseEvent *);
+    void mouseReleaseEvent(QMouseEvent *);
 signals:
 
 };

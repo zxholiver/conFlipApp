@@ -5,7 +5,7 @@
 #include <QPixmap>
 #include <mypushbutton.h>
 #include <QDebug>
-
+#include <QTimer>
 MainScene::MainScene(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainScene)
@@ -26,10 +26,28 @@ MainScene::MainScene(QWidget *parent)
     //设置位置
     startBtn->move(this->width() * 0.5 - startBtn->width() * 0.5 , this->height() * 0.7);
     //开始按钮信号
+
+    //实例化选择关卡场景
+    chooseScene = new chooseLevelScene;
+    //监听返回状态
+    connect(chooseScene,&chooseLevelScene::chooseSceneBack,[=](){
+        chooseScene->hide();
+        this->show();
+    });
     connect(startBtn,&MyPushButton::clicked,[=](){
         startBtn->zoom(0);
         startBtn->zoom(1);
+
+        //延时300ms，静态成员函数，可直接调用
+        QTimer::singleShot(300,this,[=](){
+            //隐藏主场景，显示选择关卡场景
+            this->hide();
+            chooseScene->show();
+        });
+
     });
+
+
 }
 void MainScene::paintEvent(QPaintEvent *)
 {
