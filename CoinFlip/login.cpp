@@ -3,35 +3,37 @@
 #include <QString>
 #include <QDebug>
 #include <QApplication>
+#include "websocketclient.h"
 
 login::login(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::login)
 {
     ui->setupUi(this);
+
+    ws->onNewConnection();//创建新连接
+
     //登录状态
     connect(ui->loginBtn,&QPushButton::clicked,this,&login::loginProcess);
-    QUrl url = QUrl("ws://127.0.0.1:9511");
-    wsProcess * ws = new wsProcess();
-    ws->createConnect(url);
-    //connect(ui->regBtn,&QPushButton::clicked,this,&login::onConnected(ws));
+    //注册-----
+    connect(ui->regBtn,&QPushButton::clicked,ws,&websocketClient::sendText);
 }
 
 login::~login()
 {
     delete ui;
 }
+//切换主界面槽函数
 void login::loginProcess(){
-    QString user = "";
+    QString name = "";
     QString pwd = "";
-    user = ui->getName->text();
+    name = ui->getName->text();
     pwd = ui->getPwd->text();
-    qDebug()<<user<<' '<<pwd;
+    //qDebug()<<user<<' '<<pwd;
+    ws->login(name,pwd);
     //隐藏登录界面
     this->hide();
     //登陆时发送信号展示主界面
     emit showMain();
 }
-void login::onConnected(QWebSocket * ws){
-    ws->sendTextMessage("你好");
-}
+

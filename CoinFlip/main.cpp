@@ -3,7 +3,7 @@
 #include <QApplication>
 #include <QtWebSockets>
 #include <QDebug>
-#include "wsprocess.h"
+#include "websocketclient.h"
 
 int main(int argc, char *argv[])
 {

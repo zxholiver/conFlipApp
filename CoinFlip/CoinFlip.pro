@@ -20,13 +20,13 @@ SOURCES += \
     main.cpp \
     mainscene.cpp \
     mypushbutton.cpp \
-    wsprocess.cpp
+    websocketclient.cpp
 
 HEADERS += \
     login.h \
     mainscene.h \
     mypushbutton.h \
-    wsprocess.h
+    websocketclient.h
 
 FORMS += \
     login.ui \

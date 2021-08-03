@@ -2,8 +2,7 @@
 #define LOGIN_H
 #include "mainscene.h"
 #include <QWidget>
-#include <QtWebSockets>
-#include "wsprocess.h"
+#include "websocketclient.h"
 
 namespace Ui {
 class login;
@@ -18,10 +17,8 @@ public:
     explicit login(QWidget *parent = nullptr);
     //登录处理槽函数
     void loginProcess();
-    //登录成功
-    void onConnected(QWebSocket*);
     ~login();
-
+    websocketClient * ws = new websocketClient();
 private:
     Ui::login *ui;
 };
