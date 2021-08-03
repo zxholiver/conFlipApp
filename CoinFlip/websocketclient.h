@@ -22,13 +22,18 @@ public slots:
     //注册槽函数
     void regist(QString,QString);
 signals:
+    //已登录信号
     void logined();
+    //已注册信号
+    void registered();
 private:
     //连接对象
     QWebSocket * ws = new QWebSocket();
     QString url;
+    //是否登录成功
     bool islogin;
-
+    //是否注册成功
+    bool isregister;
 };
 
 #endif // WEBSOCKETCLIENT_H

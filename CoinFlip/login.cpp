@@ -22,7 +22,12 @@ login::login(QWidget *parent) :
     });
     //----------------------------------------------
     //注册-------------------------------------------
-    connect(ui->regBtn,&QPushButton::clicked,ws,&websocketClient::sendText);
+    connect(ui->regBtn,&QPushButton::clicked,this,&login::registerProcess);
+    //如果已注册发送切换界面信号
+    connect(ws,&websocketClient::registered,[=](){
+        this->hide();
+        emit showMain();
+    });
     //----------------------------------------------
 }
 
@@ -30,7 +35,7 @@ login::~login()
 {
     delete ui;
 }
-//切换主界面槽函数
+//登录切换主界面槽函数
 void login::loginProcess(){
     QString name = "";
     QString pwd = "";
@@ -38,5 +43,14 @@ void login::loginProcess(){
     pwd = ui->getPwd->text();
     //qDebug()<<user<<' '<<pwd;
     ws->login(name,pwd);//调用登录函数
+}
+//注册处理槽函数
+void login::registerProcess(){
+    QString name = "";
+    QString pwd = "";
+    name = ui->getName->text();
+    pwd = ui->getPwd->text();
+    //qDebug()<<user<<' '<<pwd;
+    ws->regist(name,pwd);//调用注册函数
 }
 

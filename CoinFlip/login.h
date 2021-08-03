@@ -19,6 +19,8 @@ public:
 public slots:
     //登录处理槽函数
     void loginProcess();
+    //注册处理槽函数
+    void registerProcess();
 private:
     Ui::login *ui;
     websocketClient * ws = new websocketClient();
